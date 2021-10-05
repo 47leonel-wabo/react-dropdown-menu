@@ -16,11 +16,9 @@ a {
     height: 3.5rem;
     background: #3e3e3e;
     padding: 0 1rem;
-    border: 3px solid red;
 }
 
 .drop-navbar-nav {
-    border: 1px solid green;
     height: 100%;
     max-width: 100%;
     display: flex;
@@ -28,7 +26,6 @@ a {
 }
 
 .drop-navbar-nav-item {
-    border: 1px solid #6f6f6f;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,7 +54,42 @@ a {
     width: 20px;
     height: 20px;
 }
-
+/* 
 .drop-navbar-icon-btn svg:hover {
     fill: rgb(255, 145, 0);
+} */
+
+/* Styling dropdown start */
+.drop-dropdown {
+    position: absolute;
+    top: 3.4rem;
+    width: 300px;
+    transform: translateX(-45%);
+    background: #3e3e3e;
+    border: 1px solid #696969;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.drop-dropdown-menu-item {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 0.5rem;
+    transition: background 0.5s;
+}
+
+.drop-dropdown-menu-item:hover {
+    background: #696969;
+}
+
+.drop-dropdown-menu-item-icon-right {
+    width: 10px;
+    height: 10px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    fill: antiquewhite;
 }

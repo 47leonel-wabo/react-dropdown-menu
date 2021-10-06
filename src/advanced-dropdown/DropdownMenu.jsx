@@ -119,7 +119,10 @@ function DropdownMenu(props) {
                     >
                         Animals
                     </DropdownMenuItem>
-                    <DropdownMenu leftIcon={<BoltIcon />}>Logout</DropdownMenu>
+                    <DropdownMenuItem leftIcon={<BoltIcon />}>
+                        Logout
+                    </DropdownMenuItem>
+                    {/* <DropdownMenu leftIcon={<BoltIcon />}>Logout</DropdownMenu> */}
                 </div>
             </CSSTransition>
 
@@ -135,7 +138,9 @@ function DropdownMenu(props) {
                     <DropdownMenuItem
                         leftIcon={<BackArrowIcon />}
                         goToMenu="main"
-                    />
+                    >
+                        SETTINGS
+                    </DropdownMenuItem>
                     {/* settings options */}
                     <DropdownMenuItem>Settings One</DropdownMenuItem>
                     <DropdownMenuItem>Settings Two</DropdownMenuItem>
@@ -155,7 +160,9 @@ function DropdownMenu(props) {
                     <DropdownMenuItem
                         leftIcon={<BackArrowIcon />}
                         goToMenu="main"
-                    />
+                    >
+                        ANIMALS
+                    </DropdownMenuItem>
                     {/* settings options */}
                     <DropdownMenuItem leftIcon={<CatIcon />}>
                         Cat

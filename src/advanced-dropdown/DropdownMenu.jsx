@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./dropdown.styles.css";
 
 // SVG icons
@@ -10,6 +10,12 @@ import { ReactComponent as MessageIcon } from "./icons/comment-box.svg";
 import { ReactComponent as CogIcon } from "./icons/gears.svg";
 import { ReactComponent as PlusIcon } from "./icons/plus.svg";
 import { ReactComponent as BoltIcon } from "./icons/spark.svg";
+import { ReactComponent as LionIcon } from "./icons/lion.svg";
+import { ReactComponent as SpiderIcon } from "./icons/spider.svg";
+import { ReactComponent as CatIcon } from "./icons/cat.svg";
+import { ReactComponent as EagleIcon } from "./icons/eagle.svg";
+
+// CSS Transition
 import { CSSTransition } from "react-transition-group";
 
 function AdvancedNavbar(props) {
@@ -54,6 +60,11 @@ function NavbarItem(props) {
 function DropdownMenu(props) {
     const [activeMenu, setActiveMenu] = useState("main"); // settings, animals
     const [menuHeight, setMenuHeight] = useState(null);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
+    }, []);
 
     // function to calculate the height
     function calculateHeight(elt) {
@@ -79,7 +90,12 @@ function DropdownMenu(props) {
     }
 
     return (
-        <div className="drop-dropdown" style={{ height: menuHeight }}>
+        <div
+            className="drop-dropdown"
+            style={{ height: menuHeight }}
+            ref={dropdownRef}
+        >
+            {/* FIRST PAGE DROPDOWN MENU */}
             <CSSTransition
                 classNames="menu-primary"
                 in={activeMenu === "main"}
@@ -92,13 +108,22 @@ function DropdownMenu(props) {
                     <DropdownMenuItem
                         goToMenu="settings"
                         leftIcon={<CogIcon />}
-                        // rightIcon={<CaretRightIcon />}
+                        rightIcon={<CaretRightIcon />}
                     >
                         Settings
                     </DropdownMenuItem>
+                    <DropdownMenuItem
+                        goToMenu="animals"
+                        leftIcon={<LionIcon />}
+                        rightIcon={<CaretRightIcon />}
+                    >
+                        Animals
+                    </DropdownMenuItem>
+                    <DropdownMenu leftIcon={<BoltIcon />}>Logout</DropdownMenu>
                 </div>
             </CSSTransition>
 
+            {/* SECOND PAGE DROPDOWN MENU */}
             <CSSTransition
                 classNames="menu-secondary"
                 in={activeMenu === "settings"}
@@ -112,12 +137,35 @@ function DropdownMenu(props) {
                         goToMenu="main"
                     />
                     {/* settings options */}
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem>Settings One</DropdownMenuItem>
+                    <DropdownMenuItem>Settings Two</DropdownMenuItem>
+                    <DropdownMenuItem>Settings Three</DropdownMenuItem>
+                    <DropdownMenuItem>Settings Four</DropdownMenuItem>
+                </div>
+            </CSSTransition>
+
+            <CSSTransition
+                classNames="menu-secondary"
+                in={activeMenu === "animals"}
+                unmountOnExit
+                timeout={500}
+                onEnter={calculateHeight}
+            >
+                <div className="menu">
+                    <DropdownMenuItem
+                        leftIcon={<BackArrowIcon />}
+                        goToMenu="main"
+                    />
+                    {/* settings options */}
+                    <DropdownMenuItem leftIcon={<CatIcon />}>
+                        Cat
+                    </DropdownMenuItem>
+                    <DropdownMenuItem leftIcon={<EagleIcon />}>
+                        Eagle
+                    </DropdownMenuItem>
+                    <DropdownMenuItem leftIcon={<SpiderIcon />}>
+                        Spider
+                    </DropdownMenuItem>
                 </div>
             </CSSTransition>
         </div>

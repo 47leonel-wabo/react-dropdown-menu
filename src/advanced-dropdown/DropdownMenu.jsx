@@ -53,6 +53,13 @@ function NavbarItem(props) {
 
 function DropdownMenu(props) {
     const [activeMenu, setActiveMenu] = useState("main"); // settings, animals
+    const [menuHeight, setMenuHeight] = useState(null);
+
+    // function to calculate the height
+    function calculateHeight(elt) {
+        const height = elt.offsetHeight;
+        setMenuHeight(height);
+    }
 
     function DropdownMenuItem(props) {
         return (
@@ -72,12 +79,13 @@ function DropdownMenu(props) {
     }
 
     return (
-        <div className="drop-dropdown">
+        <div className="drop-dropdown" style={{ height: menuHeight }}>
             <CSSTransition
                 classNames="menu-primary"
                 in={activeMenu === "main"}
                 unmountOnExit
                 timeout={500}
+                onEnter={calculateHeight}
             >
                 <div className="menu">
                     <DropdownMenuItem>My Profile</DropdownMenuItem>
@@ -96,6 +104,7 @@ function DropdownMenu(props) {
                 in={activeMenu === "settings"}
                 unmountOnExit
                 timeout={500}
+                onEnter={calculateHeight}
             >
                 <div className="menu">
                     <DropdownMenuItem

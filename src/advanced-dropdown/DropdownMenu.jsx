@@ -10,6 +10,7 @@ import { ReactComponent as MessageIcon } from "./icons/comment-box.svg";
 import { ReactComponent as CogIcon } from "./icons/gears.svg";
 import { ReactComponent as PlusIcon } from "./icons/plus.svg";
 import { ReactComponent as BoltIcon } from "./icons/spark.svg";
+import { CSSTransition } from "react-transition-group";
 
 function AdvancedNavbar(props) {
     return (
@@ -51,9 +52,15 @@ function NavbarItem(props) {
 }
 
 function DropdownMenu(props) {
+    const [activeMenu, setActiveMenu] = useState("main"); // settings, animals
+
     function DropdownMenuItem(props) {
         return (
-            <a href="#" className="drop-dropdown-menu-item">
+            <a
+                href="#"
+                className="drop-dropdown-menu-item"
+                onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
+            >
                 {/* here, for the left icon we use the same style as previously in order to get the same look */}
                 <span className="drop-navbar-icon-btn">{props.leftIcon}</span>
                 {props.children}
@@ -66,13 +73,44 @@ function DropdownMenu(props) {
 
     return (
         <div className="drop-dropdown">
-            <DropdownMenuItem>My Profile</DropdownMenuItem>
-            <DropdownMenuItem
-                leftIcon={<CogIcon />}
-                rightIcon={<CaretRightIcon />}
+            <CSSTransition
+                classNames="menu-primary"
+                in={activeMenu === "main"}
+                unmountOnExit
+                timeout={500}
             >
-                My Profile
-            </DropdownMenuItem>
+                <div className="menu">
+                    <DropdownMenuItem>My Profile</DropdownMenuItem>
+                    <DropdownMenuItem
+                        goToMenu="settings"
+                        leftIcon={<CogIcon />}
+                        // rightIcon={<CaretRightIcon />}
+                    >
+                        Settings
+                    </DropdownMenuItem>
+                </div>
+            </CSSTransition>
+
+            <CSSTransition
+                classNames="menu-secondary"
+                in={activeMenu === "settings"}
+                unmountOnExit
+                timeout={500}
+            >
+                <div className="menu">
+                    <DropdownMenuItem
+                        leftIcon={<BackArrowIcon />}
+                        goToMenu="main"
+                    />
+                    {/* settings options */}
+                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                </div>
+            </CSSTransition>
         </div>
     );
 }

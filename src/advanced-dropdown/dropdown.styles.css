@@ -93,3 +93,44 @@ a {
     align-items: center;
     fill: antiquewhite;
 }
+
+/* CSSTransition styling PRIMARY MENU*/
+.drop-dropdown .menu-primary-enter {
+    /* initially */
+    position: absolute;
+    transform: translateX(-110%);
+}
+
+.drop-dropdown .menu-primary-enter-active {
+    transform: translateX(0%);
+    transition: all 0.5s ease;
+}
+
+.drop-dropdown .menu-primary-exit {
+    /* animate out */
+    position: absolute;
+}
+.drop-dropdown .menu-primary-exit-active {
+    transform: translateX(-110%);
+    transition: all 0.5s ease;
+}
+
+/* SECONDARY MENU */
+.drop-dropdown .menu-secondary-enter {
+    /* initially */
+    transform: translateX(110%);
+}
+
+.drop-dropdown .menu-secondary-enter-active {
+    transform: translateX(0%);
+    transition: all 0.5s ease;
+}
+
+.drop-dropdown .menu-secondary-exit {
+    /* animate out */
+}
+
+.drop-dropdown .menu-secondary-exit-active {
+    transform: translateX(110%);
+    transition: all 0.5s ease;
+}
